@@ -1,0 +1,12 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+  
+before_install:
+  - docker pull makarius/isabelle:Isabelle2017
+  
+script:
+  - ./bin/cloud_build.sh
