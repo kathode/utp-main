@@ -6,6 +6,8 @@ services:
   - docker
   
 before_install:
+  - useradd -m isabelle && (echo isabelle:isabelle | chpasswd)
+  - chown -R isabelle:isabelle *
   - docker pull makarius/isabelle:Isabelle2017
   
 script:
