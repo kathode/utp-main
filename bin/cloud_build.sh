@@ -23,7 +23,8 @@ heaps=( "UTP-Toolkit" "UTP" "UTP-Designs" "UTP-Reactive" "UTP-Reactive-Designs" 
 
 for ((i=0;i<${#heaps[@]};++i));
 do
-	 $isabelle build -d $CONTAINER_ISABELLE_UTP -d $CONTAINER_ISABELLE_UTP/contrib -b "${heaps[i]}" || break
+	mkdir $ISABELLE_UTP/${dirs[i]}/output
+	$isabelle build -d $CONTAINER_ISABELLE_UTP -d $CONTAINER_ISABELLE_UTP/contrib -b "${heaps[i]}"
         if [ -f "$ISABELLE_UTP/${dirs[i]}/output/document.pdf" ]; then
                 echo "Installing ${heaps[i]} documentation to doc/${heaps[i]}.pdf..."
 		cp "$ISABELLE_UTP/${dirs[i]}/output/document.pdf" "$ISABELLE_UTP/doc/${heaps[i]}.pdf"
