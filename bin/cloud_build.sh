@@ -15,7 +15,7 @@ bash "$BIN_DIR/utp_deps.sh"
 ROOT=$ISABELLE_UTP
 
 # Build all heap images of Isabelle/UTP
-isabelle="docker run --user 0:0 --mount type=bind,source=$TRAVIS_BUILD_DIR,target=$CONTAINER_ISABELLE_UTP makarius/isabelle:Isabelle2017"
+isabelle="docker run --user 0:0 --mount type=bind,source=$TRAVIS_BUILD_DIR,target=$CONTAINER_ISABELLE_UTP pfribeiro/isabelle-hol-texlive"
 printf "\nBuilding Isabelle/UTP sessions... \n\n"
 
 dirs=( "toolkit" "utp" "theories/designs" "theories/reactive" "theories/rea_designs" "theories/circus" "tutorial" )
