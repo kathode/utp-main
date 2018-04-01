@@ -21,14 +21,12 @@ printf "\nBuilding Isabelle/UTP sessions... \n\n"
 dirs=( "toolkit" "utp" "theories/designs" "theories/reactive" "theories/rea_designs" "theories/circus" "tutorial" )
 heaps=( "UTP-Toolkit" "UTP" "UTP-Designs" "UTP-Reactive" "UTP-Reactive-Designs" "UTP-Circus" "UTP-Tutorial" )
 
+$isabelle build -d $CONTAINER_ISABELLE_UTP -d $CONTAINER_ISABELLE_UTP/contrib -b ${heaps[@]} || exit
+
 for ((i=0;i<${#heaps[@]};++i));
 do
-	# Need to give write permissions to docker container to write to same directory. No obvious alternative.
-	chmod +o+w "$ISABELLE_UTP/${dirs[i]}"
-	$isabelle build -d $CONTAINER_ISABELLE_UTP -d $CONTAINER_ISABELLE_UTP/contrib -b "${heaps[i]}" || exit
         if [ -f "$ISABELLE_UTP/${dirs[i]}/output/document.pdf" ]; then
                 echo "Installing ${heaps[i]} documentation to doc/${heaps[i]}.pdf..."
 		cp "$ISABELLE_UTP/${dirs[i]}/output/document.pdf" "$ISABELLE_UTP/doc/${heaps[i]}.pdf"
         fi
-	chmod +o-w "$ISABELLE_UTP/${dirs[i]}"
 done
